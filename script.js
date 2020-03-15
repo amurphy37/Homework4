@@ -6,10 +6,6 @@ var interval;
 // variables to reference DOM elements
 var questionsEl = document.getElementById("questions");
 var timerEl = document.getElementById("time");
-var A = document.getElementById("btn1");
-var B = document.getElementById("btn2");
-var C = document.getElementById("btn3");
-var D = document.getElementById("btn4");
 var submitBtn = document.getElementById("submit");
 var startBtn = document.getElementById("start");
 var initialsEl = document.getElementById("initials");
@@ -27,13 +23,7 @@ var answerA = ["<javascript>", "alertbox(“GeeksforGeeks”);", "global variabl
 var answerB = ["<scripted>", "msg(“GeeksforGeeks”);", "local variable", "merge()", "If", "window.handleEvents (Event.CLICK);", "a link", "captureEvents(args eventType)", "Close(object)", "dateObjectName.new Date([parameters])", "var txt = new Array:1=('tim')2=('kim')3=('jim')"];
 var answerC = ["<script>", "msgbox(“GeeksforGeeks”);", "Both of the above.", "concat()", "Switch", "window.routeEvents(Event.CLICK );", "a cursor", "captureEvents(eventType)", "Close(val)", "dateObjectName := new Date([parameters])", "var txt = new Array('tim','kim','jim')"];
 var answerD = ["<js>", "alert(“GeeksforGeeks”);", "None of the above.", "append()", "For", "window.raiseEvents(Event.CLICK );", "a form", "captureEvents(eventVal)", "Close()", "dateObjectName Date([parameters])", "var txt = new Array='tim','kim','jim'"];
-var correctAnswers = [C,D,A,C,B,A,A,C,D,A,C];
-var displayedQuestion = questions[currentQuestionIndex];
-var displayedanswerA = answerA[currentQuestionIndex];
-var displayedanswerB = answerB[currentQuestionIndex];
-var displayedanswerC = answerC[currentQuestionIndex];
-var displayedanswerD = answerD[currentQuestionIndex];
-var correctAnswer = correctAnswers[currentQuestionIndex];
+var correctAnswers = ["btn3","btn4","btn1","btn3","btn2","btn1","btn1","btn3","btn4","btn1","btn3"];
 var score = 0;
 
 // Creating function for timer
@@ -53,62 +43,60 @@ function setTime() {
   }
 )}
 function getQuestion() {
-  $(document).ready(function(){
   // update title with current question
-  $("#question-title").text(displayedQuestion);
+  $("#question-title").text(questions[currentQuestionIndex]);
 
   // clear out any old question choices
   $("#choices").value = "";
 
   // Grab Answers
-  $("#btn1").text(displayedanswerA);
-  $("#btn2").text(displayedanswerB);
-  $("#btn3").text(displayedanswerC);
-  $("#btn4").text(displayedanswerD);
+  $("#btn1").text(answerA[currentQuestionIndex]);
+  $("#btn2").text(answerB[currentQuestionIndex]);
+  $("#btn3").text(answerC[currentQuestionIndex]);
+  $("#btn4").text(answerD[currentQuestionIndex]);
 
   // display on the page
   $("#questions").removeClass("hide");
   }
-)}
 
-function questionClick() {
-  $(document).ready(function(){
-
-    console.log(event.target);
-
-  // check if user guessed wrong and penalize time if incorrect
-  if (event.target != correctAnswer) {
-    $(feedbackEl).removeClass("feedback hide");
-    $(feedbackEl).text("Incorrect :(");
-    time - 5;
-    return time;
-    setTime()
+  function questionClick(value) {
+  $("#next-btn").removeClass("hide");
+  
+// check if user guessed wrong and penalize time if incorrect
+  if (value != correctAnswers[currentQuestionIndex]) {
+    $("#feedback").removeClass("hide");
+    $("#feedback").text("Incorrect :(");
+    console.log(score);
   }
   // else show correct feedback
   else {
-    $(feedbackEl).removeClass("feedback hide");
-    $(feedbackEl).text("Correct!");
+    $("#feedback").removeClass("hide");
+    $("#feedback").text("Correct!");
     score++;
+    console.log(score)
   }
-  // move to next question
-  currentQuestionIndex++;
-
-
+  
   // check if we've run out of questions
 
-  if (currentQuestionIndex = 10) {
-    quizEnd();
+  // if (currentQuestionIndex = 10) {
+  //   quizEnd();
+  // }
+
+  // else {
+  //   var currentQuestionIndex = currentQuestionIndex;
+  //   getQuestion();
+  // }
+
+  // return score;
+
   }
 
-  else {
-    var currentQuestionIndex = currentQuestionIndex;
-    getQuestion();
-  }
-
-  return score;
-
-  }
-)}
+ function nextQuestion() {
+   $("#next-btn").addClass("hide");
+   $("#feedback").addClass("hide");
+   currentQuestionIndex++ 
+   getQuestion();
+ } 
 
 
 function quizEnd() {

@@ -35,10 +35,10 @@
     <div id="questions" class="hide">
       <h2 id="question-title"></h2>
       <div id="choices" class="choices">
-        <button onclick= "questionClick()" id="btn1"></button>
-        <button onclick= "questionClick()" id="btn2"></button>
-        <button onclick= "questionClick()" id="btn3"></button>
-        <button onclick= "questionClick()" id="btn4"></button>
+        <button onclick= "questionClick('btn1')" value="btn1" id="btn1"></button>
+        <button onclick= "questionClick('btn2')" value="btn2" id="btn2"></button>
+        <button onclick= "questionClick('btn3')" value="btn3" id="btn3"></button>
+        <button onclick= "questionClick('btn4')" value="btn4" id="btn4"></button>
       </div>
     </div>
 
@@ -53,8 +53,14 @@
     </div>
 
     <!-- Show the quiz taker if they got the question wrong or right by updating this div with Javascript -->
-    <div id="feedback" class="feedback hide"></div>
-  </div>
+    <div>
+      <div id="feedback" class="feedback hide"></div>
+      <br>
+      <div>
+        <button onclick="nextQuestion()" id="next-btn" class="btn-lg hide">Next</button>
+      </div>
+    </div>
+    
 
 </body>
 </html>
