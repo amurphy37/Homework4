@@ -8,14 +8,14 @@ function printHighscores() {
 // sort highscores by score property in descending order
   var sortedScores = JSONhighScores.sort(function(a,b) {return b.score-a.score});
   console.log(sortedScores);
+  console.log(sortedScores.length);
   
 // Print to page
-   for (i=0; i<sortedScores.length; i++) {
-
-    var listItem = document.createElement('li');
-    var listText = document.createTextNode("test");
-    listItem.appendChild(listText);
-     document.getElementById("highScores").appendChild(listItem);
+   for (i=0; i < sortedScores.length; i++) {
+    var list = $("#highScores");
+    var listItem = sortedScores[i];
+    var listItemEl = $('<li>');
+    $(list).append(listItemEl);
    } 
 
 }
