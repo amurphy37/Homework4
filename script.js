@@ -25,18 +25,22 @@ var answerC = ["<script>", "msgbox(“GeeksforGeeks”);", "Both of the above.",
 var answerD = ["<js>", "alert(“GeeksforGeeks”);", "None of the above.", "append()", "For", "window.raiseEvents(Event.CLICK );", "a form", "captureEvents(eventVal)", "Close()", "dateObjectName Date([parameters])", "var txt = new Array='tim','kim','jim'"];
 var correctAnswers = ["btn3","btn4","btn1","btn3","btn2","btn1","btn1","btn3","btn4","btn1","btn3"];
 var score = 0;
+var highScores = [];
 
 // Creating function for timer
 
 function setTime() {
   $(document).ready(function(){
-  setInterval(function () {
+  var t = setInterval(function () {
     time--;
     $("#time").text(time + " " + "seconds");
 
     if (time <= 0) {
-      clearInterval(timerInterval);
-      // sendMessage();
+      clearInterval(t);
+      alert("time's up!");
+    }
+    else if(currentQuestionIndex===10){
+      clearInterval(t);
     }
 
     }, 1000);
@@ -66,59 +70,54 @@ function getQuestion() {
   if (value != correctAnswers[currentQuestionIndex]) {
     $("#feedback").removeClass("hide");
     $("#feedback").text("Incorrect :(");
-    console.log(score);
+    (time--);
+    (time--);
+    (time--);
+    (time--);
+    (time--);
   }
   // else show correct feedback
   else {
     $("#feedback").removeClass("hide");
     $("#feedback").text("Correct!");
     score++;
-    console.log(score)
   }
-  
-  // check if we've run out of questions
-
-  // if (currentQuestionIndex = 10) {
-  //   quizEnd();
-  // }
-
-  // else {
-  //   var currentQuestionIndex = currentQuestionIndex;
-  //   getQuestion();
-  // }
-
-  // return score;
-
-  }
+}
 
  function nextQuestion() {
    $("#next-btn").addClass("hide");
    $("#feedback").addClass("hide");
    currentQuestionIndex++ 
-   getQuestion();
+   console.log(currentQuestionIndex);
+
+   // check if we've run out of questions
+
+  if (currentQuestionIndex === 10) {
+    quizEnd();
+  }
+
+  else {
+    getQuestion();
+  }
+
+  // return score;
  } 
 
 
 function quizEnd() {
-  $(document).ready(function(){
-  // stop timer
-  var timerIneterval = setInterval(function () {
-    timerEl.textContent = time + "seconds";
-  })
-  clearInterval(timerInterval);
 
   // show end screen
-  $("end-screen").removeClass("hide");
+  $("#end-screen").removeClass("hide");
 
   // show final score
-  $("final-score").text(score);
+  $("#final-score").text(score);
 
 
   // hide questions section
-  $(questionsEl).addClass("hide");
+  $("#questions").addClass("hide");
 
-  }
-)}
+  
+}
 
 function startQuiz() {
   $(document).ready(function(){
@@ -138,24 +137,26 @@ function startQuiz() {
   }
 )}
 
-// function saveHighscore() {
-//   // get value of input box
-//   var initials = ???
+function saveHighScore() {
+  // get value of input box
+  var initials = $("#initials").val();
 
-//   // make sure value wasn't empty
-//   if (initials !== "") {
-//     // get saved scores from localstorage, or if not any, set to empty array
-
-
-//     // format new score object for current user
-
-//     // save to localstorage
+  // make sure value wasn't empty
+  if (initials === "") {
+    alert("invalid response. Please input initials and click submit");
+  }
+  //   // get saved scores from localstorage, or if not any, set to empty array
 
 
-//     // redirect to next page
+  //   // format new score object for current user
 
-//   }
-// }
+  //   // save to localstorage
+
+
+  //   // redirect to next page
+
+  // }
+}
 
 
 // // // user clicks button to submit initials
