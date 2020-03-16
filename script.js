@@ -161,9 +161,6 @@ function saveHighScore() {
   
   localStorage.setItem("highScores", JSON.stringify(highScores))
 
-  //   // redirect to next page
-
-  
-
+  //   // redirect to high scores
   }
 }
