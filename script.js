@@ -87,8 +87,7 @@ function getQuestion() {
  function nextQuestion() {
    $("#next-btn").addClass("hide");
    $("#feedback").addClass("hide");
-   currentQuestionIndex++ 
-   console.log(currentQuestionIndex);
+   currentQuestionIndex++;
 
    // check if we've run out of questions
 
@@ -146,23 +145,25 @@ function saveHighScore() {
     alert("invalid response. Please input initials and click submit");
   }
   //   // get saved scores from localstorage, or if not any, set to empty array
+  else {
+  // Loading from local storage
+  var highScores = JSON.parse(localStorage.getItem("highScores") || "[]")
+ // format new score object for current user
+  var newHighScore = {
+    initials: $("#initials").val(),
+    score: score
+  }
+  // push new high score to high scores array
 
+  highScores.push(newHighScore);
 
-  //   // format new score object for current user
-
-  //   // save to localstorage
-
+  // push to local storage in string form
+  
+  localStorage.setItem("highScores", JSON.stringify(highScores))
 
   //   // redirect to next page
 
-  // }
+  
+
+  }
 }
-
-
-// // // user clicks button to submit initials
-
-// // // user clicks button to start quiz
-
-
-// //
-
